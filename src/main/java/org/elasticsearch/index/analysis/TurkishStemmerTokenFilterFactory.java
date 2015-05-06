@@ -22,6 +22,7 @@ public class TurkishStemmerTokenFilterFactory extends AbstractTokenFilterFactory
   private final CharArraySet lastConsonantExceptions;
   private final CharArraySet vowelHarmonyExceptions;
   private final CharArraySet averageStemSizeExceptions;
+  private final boolean preserveOriginal;
 
 
   @Inject
@@ -39,6 +40,15 @@ public class TurkishStemmerTokenFilterFactory extends AbstractTokenFilterFactory
         "last_consonant_exceptions_path", Version.LUCENE_44);
     this.averageStemSizeExceptions = parseAverageStemSizeExceptions(env, settings,
         "average_stem_size_exceptions_path", Version.LUCENE_44);
+    this.preserveOriginal = settings.getAsBoolean("preserve_original", false);
+  }
+
+
+  /**
+   * Does the filter preserve the original tokens?
+   */
+  public boolean isPreserveOriginal() {
+    return preserveOriginal;
   }
 
   @Override
@@ -47,7 +57,8 @@ public class TurkishStemmerTokenFilterFactory extends AbstractTokenFilterFactory
                                          protectedWords,
                                          vowelHarmonyExceptions,
                                          lastConsonantExceptions,
-                                         averageStemSizeExceptions);
+                                         averageStemSizeExceptions,
+                                         preserveOriginal);
   }
 
   private CharArraySet parseProtectedWords(Environment env, Settings settings,

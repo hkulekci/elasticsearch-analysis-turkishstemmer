@@ -132,6 +132,7 @@ public class TurkishStemmer {
   private final CharArraySet vowelHarmonyExceptions;
   private final CharArraySet lastConsonantExceptions;
   private final CharArraySet averageStemSizeExceptions;
+  private final boolean preserveOriginal;
 
   public TurkishStemmer() {
     this.protectedWords            = TurkishStemmer.getDefaultProtectedWordSet();
@@ -143,11 +144,13 @@ public class TurkishStemmer {
   public TurkishStemmer(final CharArraySet protectedWords,
                         final CharArraySet vowelHarmonyExceptions,
                         final CharArraySet lastConsonantExceptions,
-                        final CharArraySet averageStemSizeExceptions) {
+                        final CharArraySet averageStemSizeExceptions,
+                        final boolean      preserveOriginal) {
     this.protectedWords          = protectedWords;
     this.vowelHarmonyExceptions  = vowelHarmonyExceptions;
     this.lastConsonantExceptions = lastConsonantExceptions;
     this.averageStemSizeExceptions = averageStemSizeExceptions;
+    this.preserveOriginal          = preserveOriginal;
   }
 
   /**
